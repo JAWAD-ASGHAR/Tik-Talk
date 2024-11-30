@@ -82,20 +82,51 @@ export const login = async (request, response, next) => {
 export const getUserInfo = async (request, response, next) => {
   try {
     const userData = await User.findById(request.userId);
-    if(!userData) return response.status(404).json({message: "User with given ID not found!"})
-    
+    if (!userData)
+      return response
+        .status(404)
+        .json({ message: "User with given ID not found!" });
+
     return response.status(200).json({
-        id: userData.id,
-        email: userData.email,
-        profileSetup: userData.profileSetup,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        image: userData.image,
-        color: userData.color,
-      },
-    );
+      id: userData.id,
+      email: userData.email,
+      profileSetup: userData.profileSetup,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      image: userData.image,
+      color: userData.color,
+    });
   } catch (error) {
     console.error("Error during login:", error);
     return response.status(500).json({ message: "internal server error!" });
   }
-}
+};
+
+export const updateProfile = async (request, response, next) => {
+  try {
+    const userId = request.userId;
+    const { firstName, lastName, color } = request.body;
+    if (!firstName || !lastName || color === null) {
+      return response.status(400).json({ message: "All fields are required!" });
+    }
+
+    const userData = await User.findByIdAndUpdate(
+      userId,
+      { firstName, lastName, color, profileSetup: true },
+      { new: true, runValidators: true }
+    );
+
+    return response.status(200).json({
+      id: userData.id,
+      email: userData.email,
+      profileSetup: userData.profileSetup,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      image: userData.image,
+      color: userData.color,
+    });
+  } catch (error) {
+    console.error("Error during login:", error);
+    return response.status(500).json({ message: "internal server error!" });
+  }
+};

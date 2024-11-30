@@ -116,14 +116,14 @@ const Auth = () => {
                   type="email"
                   className="rounded-full p-6"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value.trim())}
                 />
                 <Input
                   placeholder="Password"
                   type="password"
                   className="rounded-full p-6"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value.trim())}
                 />
                 <Button className="rounded-full p-6" onClick={handleLogin}>
                   Login
@@ -135,21 +135,21 @@ const Auth = () => {
                   type="email"
                   className="rounded-full p-6"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value.trim())}
                 />
                 <Input
                   placeholder="Password"
                   type="password"
                   className="rounded-full p-6"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value.trim())}
                 />
                 <Input
                   placeholder="Confirm Password"
                   type="password"
                   className="rounded-full p-6"
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={(e) => setConfirmPassword(e.target.value.trim())}
                 />
                 <Button className="rounded-full p-6" onClick={handleSignup}>
                   Sign Up
