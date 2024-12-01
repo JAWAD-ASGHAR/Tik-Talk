@@ -1,19 +1,26 @@
+import { useAppStore } from "@/store";
+import NewDM from "./components/NewDM";
+import ProfileInfo from "./components/ProfileInfo";
+
 const ContactsContainer = () => {
+  const {closeChat} = useAppStore();
   return (
     <div className="relative md:w-[35vw] lg:w-[30vw] xl:[20vw] bg-[#1b1c24] border-r-2 border-[#2f303b] w-full">
-      <div className="pt-3">
+      <div className="cursor-pointer" onClick={closeChat}>
         <Logo />
       </div>
       <div className="my-5">
-        <div className="flex items-center justify-center pr-10">
+        <div className="flex items-center justify-between pr-5">
           <Title text="Direct Messages" />
+          <NewDM />
         </div>
       </div>
       <div className="my-5">
-        <div className="flex items-center justify-center pr-10">
+        <div className="flex items-center justify-between pr-5">
           <Title text="Channels" />
         </div>
       </div>
+      <ProfileInfo />
     </div>
   );
 };
@@ -55,7 +62,7 @@ const Logo = () => {
 
 const Title = ({text}) => {
   return (
-    <h6 className="uppercase tracking-widest text-neutral-400 p-10 font-light text-opacity-90 text-sm">
+    <h6 className="uppercase tracking-widest text-neutral-400 px-5 font-light text-opacity-90 text-sm">
       {text}
     </h6>
   )

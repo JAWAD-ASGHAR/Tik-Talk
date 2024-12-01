@@ -183,3 +183,13 @@ export const deleteProfileImage = async (request, response, next) => {
     return response.status(500).json({ message: "internal server error!" });
   }
 };
+
+export const logout = async (request, response, next) => {
+  try {
+    response.cookie("jwt", "", { maxAge: 1 , secure: true, sameSite: "none"});
+    return response.status(200).json({ message: "logout successful!" });
+  } catch (error) {
+    console.error("Error during logout:", error);
+    return response.status(500).json({ message: "internal server error!" });
+  }
+};

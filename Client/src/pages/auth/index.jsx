@@ -51,22 +51,29 @@ const Auth = () => {
 
   const handleLogin = async () => {
     if (validateLogin()) {
-      const response = await apiClient.post(
-        LOGIN_ROUTE,
-        { email, password },
-        { withCredentials: true }
-      );
-      if (response.data.user.id) {
-        setUserInfo(response.data.user);
-        if (response.data.user.profileSetup) navigate("/chat");
-        else navigate("/profile");
+      try {
+        const response = await apiClient.post(
+          LOGIN_ROUTE,
+          { email, password },
+          { withCredentials: true }
+        );
+        if (response.data.user.id) {
+          setUserInfo(response.data.user);
+          if (response.data.user.profileSetup) navigate("/chat");
+          else navigate("/profile");
+        }
+        toast.success("Logged in successfully!");
+        console.log(response);
+      } catch (error) {
+        toast.error("Invalid login details!");
+        console.error(error);
       }
-      console.log(response);
     }
   };
 
   const handleSignup = async () => {
     if (validateSignup()) {
+     try {
       const response = await apiClient.post(
         SIGNUP_ROUTE,
         { email, password },
@@ -76,7 +83,12 @@ const Auth = () => {
       if (response.status === 201) {
         navigate("/profile");
       }
+      toast.success("Signed up successfully!");
       console.log(response);
+     } catch (error) {
+      toast.error("Failed to sign up!");
+      console.error(error);
+     }
     }
   };
 
