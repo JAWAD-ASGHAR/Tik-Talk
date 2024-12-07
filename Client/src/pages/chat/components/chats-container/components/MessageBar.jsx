@@ -46,6 +46,7 @@ const MessageBar = () => {
           type="text"
           placeholder="Type a message..."
           value={message}
+          onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
           onChange={(e) => setMessage(e.target.value)}
           className="flex-1 bg-transparent focus:outline-none focus:border-none p-5 rounded-md"
         />

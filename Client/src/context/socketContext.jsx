@@ -31,16 +31,12 @@ export const SocketProvider = ({ children }) => {
         // Inline the handler to avoid the warning
         socket.current.on("recievedMessage", (message) => {
           const { selectedChatData, selectedChatType, addMessage } = useAppStore.getState();
-            
-            // console.log("selectedChatData", selectedChatData)
-            // console.log("message.sender", message.sender)
-            // console.log("message.recipient", message.recipient)
 
           if (
             selectedChatType !== undefined &&
             (selectedChatData._id === message.sender._id || selectedChatData._id === message.recipient._id)
           ) {
-            console.log("Message received:", message);
+            // console.log("Message received:", message);
             addMessage(message);
           }
         });
