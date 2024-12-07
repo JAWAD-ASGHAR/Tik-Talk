@@ -11,3 +11,6 @@ export const DELETE_PROFILE_IMAGE = `${AUTH_ROUTES}/delete-profile-image`;
 
 export const CONTACT_ROUTES = "api/contacts";
 export const SEARCH_CONTACT = `${CONTACT_ROUTES}/search`;
+
+export const MESSAGE_ROUTES = "api/messages";
+export const GET_MESSAGES = `${MESSAGE_ROUTES}/get-messages`;
